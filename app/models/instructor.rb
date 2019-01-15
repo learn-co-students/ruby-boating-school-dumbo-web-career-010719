@@ -1,4 +1,5 @@
 class Instructor
+    
     @@all=[]
     def initialize(name)
         @name=name
@@ -13,24 +14,24 @@ class Instructor
         @@all
     end
 
+    def find_student_and_test_name(student1, test_name1, status)
+        BoatingTest.all.each do |boatingTest|
+            if boatingTest.student == student1 && boatingTest.test_name == test_name1
+               boatingTest.test_status=status
+               return boatingTest
+            end
+         end
+         BoatingTest.new(Student.new(student1.first_name), test_name1, status, self)
+    end
+
     def pass_student(name, test_name)
-         BoatingTest.all.each do |boatingTest|
-             if boatingTest.student.first_name==name && boatingTest.test_name == test_name
-                boatingTest.test_status="passed"
-                return boatingTest
-             end
-          end
-          return  BoatingTest.new(Student.new(name), test_name, "passed", self)
+        student=Student.find_student(name)
+        find_student_and_test_name(student, test_name, "passed")
     end
 
     def fail_student(name, test_name)
-         BoatingTest.all.each do |boatingTest|
-             if boatingTest.student.first_name==name && boatingTest.test_name == test_name
-                boatingTest.test_status="failed"
-                return boatingTest
-             end
-        end
-        return BoatingTest.new(Student.new(name), test_name, "failed", self)
+        student=Student.find_student(name)
+        find_student_and_test_name(student, test_name, "failed")
     end
     
 end

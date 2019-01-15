@@ -1,9 +1,10 @@
 class Student
+
     @@all=[]
 
     def initialize(first_name)
         @first_name=first_name
-        @@all=self
+        @@all<<self
     end
 
     def first_name
@@ -18,12 +19,14 @@ class Student
         BoatingTest.new(self,test_name, test_status, instructor)
     end
 
-    def self.find(name)
+    def self.find_student(name)
         @@all.find {|student| student.first_name==name}
     end
 
     def grade_percentage
+       
         pass_count=0.0
+        
         student_count=0.0
         BoatingTest.all.each do |boatTest|
       
