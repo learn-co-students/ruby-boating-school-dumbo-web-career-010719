@@ -20,7 +20,7 @@ class Instructor
 				return test
 			end
 		end
-		BoatingTest.new(student, test, "passed" , self)
+		BoatingTest.new(Student.new(student_name), test, "passed" , self)
 	end
 
 	def fail_student(student_name, test)
