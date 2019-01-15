@@ -15,23 +15,22 @@ class Instructor
 
     def pass_student(name, test_name)
          BoatingTest.all.each do |boatingTest|
-             if boatingTest.student.first_name==name
+             if boatingTest.student.first_name==name && boatingTest.test_name == test_name
                 boatingTest.test_status="passed"
                 return boatingTest
-            else
-              return  BoatingTest.new(Student.new(name), test_name, "passed", self)
              end
           end
+          return  BoatingTest.new(Student.new(name), test_name, "passed", self)
     end
 
     def fail_student(name, test_name)
          BoatingTest.all.each do |boatingTest|
-             if boatingTest.student.first_name==name
+             if boatingTest.student.first_name==name && boatingTest.test_name == test_name
                 boatingTest.test_status="failed"
                 return boatingTest
-            else
-                 return BoatingTest.new(Student.new(name), test_name, "failed", self)
              end
         end
+        return BoatingTest.new(Student.new(name), test_name, "failed", self)
     end
+    
 end
