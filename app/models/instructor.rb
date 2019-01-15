@@ -19,11 +19,14 @@ class Instructor
 			if test.student == student && test.boat_name == testing
 				p test.boat_status
 				test.boat_status = "passed"
-
 				return "updated to pass"
 			end
 		end
-		BoatingTest.new(Student.new(student_name), testing, "passed" , self)
+		if student.nil?
+			BoatingTest.new(Student.new(student_name), testing, "passed" , self)
+		else
+			BoatingTest.new(student, testing, "passed" , self)
+		end
 
 	end
 
@@ -35,6 +38,10 @@ class Instructor
 				return "updated to fail"
 			end
 		end
-		BoatingTest.new(Student.new(student_name), testing, "failed" , self)
+		if student.nil?
+			BoatingTest.new(Student.new(student_name), testing, "failed" , self)
+		else
+			BoatingTest.new(student, testing, "failed" , self)
+		end
 	end
 end
