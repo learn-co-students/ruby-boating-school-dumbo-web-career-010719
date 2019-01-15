@@ -12,26 +12,29 @@ class Instructor
 		@@all
 	end
 
-	def pass_student(student_name, test)
+	def pass_student(student_name, testing)
+
 		student = Student.find_student(student_name)
 		BoatingTest.all.each do |test|
-			if test.student == student && test.boat_name == test
+			if test.student == student && test.boat_name == testing
+				p test.boat_status
 				test.boat_status = "passed"
-				return test
+
+				return "updated to pass"
 			end
 		end
-		BoatingTest.new(Student.new(student_name), test, "passed" , self)
+		BoatingTest.new(Student.new(student_name), testing, "passed" , self)
+
 	end
 
-	def fail_student(student_name, test)
+	def fail_student(student_name, testing)
 		student = Student.find_student(student_name)
 		BoatingTest.all.each do |test|
-			if test.student == student && test.boat_name == test
+			if test.student == student && test.boat_name == testing
 				test.boat_status = "failed"
-				return test
+				return "updated to fail"
 			end
 		end
-		BoatingTest.new(student, test, "failed" , self)
-
+		BoatingTest.new(Student.new(student_name), testing, "failed" , self)
 	end
 end
